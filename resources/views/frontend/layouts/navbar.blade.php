@@ -149,8 +149,26 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="/fasilitas">
+                        Fasilitas
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="/prestasi">
                         Prestasi
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/event">
+                        Event
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/ekstrakurikuler">
+                        Ekskul
                     </a>
                 </li>
 
@@ -165,6 +183,60 @@
                         Kontak
                     </a>
                 </li>
+
+                <!-- AUTH ADMIN -->
+                @auth
+
+                <li class="nav-item ms-lg-3">
+
+                    <a href="/dashboard"
+                    class="nav-link">
+
+                        <i class="fas fa-user-shield me-1"></i>
+
+                        Dashboard
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item ms-lg-2 mt-3 mt-lg-0">
+
+                    <form
+                    action="{{ route('logout') }}"
+                    method="POST">
+
+                        @csrf
+
+                        <button
+                        class="btn btn-danger rounded-pill px-4 fw-semibold">
+
+                            <i class="fas fa-sign-out-alt me-1"></i>
+
+                            Logout
+
+                        </button>
+
+                    </form>
+
+                </li>
+
+                @else
+
+                <li class="nav-item ms-lg-3">
+
+                    <a href="/login"
+                    class="nav-link">
+
+                        <i class="fas fa-lock me-1"></i>
+
+                        Admin
+
+                    </a>
+
+                </li>
+
+                @endauth
 
                 <!-- BUTTON PPDB -->
                 <li class="nav-item ms-lg-3 mt-3 mt-lg-0">

@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PPDB extends Model
 {
-    //
+    protected $table = 'ppdb';
+
+    protected $guarded = [];
 }

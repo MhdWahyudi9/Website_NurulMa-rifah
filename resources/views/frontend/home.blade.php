@@ -2,157 +2,12 @@
 
 @section('content')
 
-<style>
-
-.hero-slider{
-    position:relative;
-}
-
-.hero-slider img{
-    width:100%;
-    height:95vh;
-    object-fit:cover;
-}
-
-.hero-overlay{
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        to right,
-        rgba(0,0,0,0.75),
-        rgba(0,0,0,0.3)
-    );
-    z-index:1;
-}
-
-.hero-caption{
-    position:absolute;
-    top:50%;
-    left:10%;
-    transform:translateY(-50%);
-    z-index:2;
-    max-width:700px;
-    color:white;
-}
-
-.hero-caption h1{
-    font-size:70px;
-    font-weight:800;
-    line-height:1.2;
-    margin-bottom:25px;
-}
-
-.hero-caption p{
-    font-size:22px;
-    margin-bottom:35px;
-    color:#e2e8f0;
-}
-
-.btn-hero{
-    background:#facc15;
-    color:#0f172a;
-    padding:16px 40px;
-    border-radius:50px;
-    font-weight:700;
-    font-size:18px;
-    transition:0.3s;
-}
-
-.btn-hero:hover{
-    background:white;
-    transform:translateY(-3px);
-}
-
-section{
-    padding:100px 0;
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:60px;
-    font-size:50px;
-    font-weight:800;
-    color:#0f172a;
-}
-
-.school-card{
-    border:none;
-    border-radius:28px;
-    overflow:hidden;
-    transition:0.4s;
-}
-
-.school-card:hover{
-    transform:translateY(-10px);
-}
-
-.school-card img{
-    height:260px;
-    object-fit:cover;
-}
-
-.feature-box{
-    background:white;
-    border-radius:28px;
-    padding:50px 30px;
-    transition:0.3s;
-}
-
-.feature-box:hover{
-    transform:translateY(-8px);
-}
-
-.feature-box i{
-    color:#facc15;
-    margin-bottom:25px;
-}
-
-.gallery img{
-    height:280px;
-    object-fit:cover;
-    transition:0.4s;
-}
-
-.gallery img:hover{
-    transform:scale(1.05);
-}
-
-.ppdb-section{
-    background:linear-gradient(135deg,#facc15,#f59e0b);
-    color:#0f172a;
-    border-radius:40px;
-    padding:80px 40px;
-}
-
-@media(max-width:768px){
-
-    .hero-caption{
-        left:5%;
-        right:5%;
-    }
-
-    .hero-caption h1{
-        font-size:42px;
-    }
-
-    .hero-caption p{
-        font-size:18px;
-    }
-
-    .section-title{
-        font-size:36px;
-    }
-
-}
-
-</style>
-
 <!-- HERO -->
 <div class="swiper heroSwiper hero-slider">
 
     <div class="swiper-wrapper">
 
-        @foreach($slider as $item)
+        @forelse($slider as $item)
 
         <div class="swiper-slide position-relative">
 
@@ -163,6 +18,12 @@ section{
             alt="{{ $item->judul }}">
 
             <div class="hero-caption">
+
+                <span class="hero-badge">
+
+                    Yayasan Nurul Ma'rifah
+
+                </span>
 
                 <h1>
 
@@ -176,24 +37,71 @@ section{
 
                 </p>
 
-                @if($item->tombol_text)
+                <div class="d-flex flex-wrap gap-3">
 
-                <a href="{{ $item->tombol_link }}"
-                class="btn btn-hero">
+                    @if($item->tombol_text)
 
-                    {{ $item->tombol_text }}
+                    <a href="{{ $item->tombol_link }}"
+                    class="btn btn-hero">
 
-                </a>
+                        {{ $item->tombol_text }}
 
-                @endif
+                    </a>
+
+                    @endif
+
+                    <a href="/profil"
+                    class="btn btn-outline-light btn-lg rounded-pill px-4">
+
+                        Tentang Kami
+
+                    </a>
+
+                </div>
 
             </div>
 
         </div>
 
-        @endforeach
+        @empty
+
+        <div class="swiper-slide position-relative">
+
+            <div class="hero-overlay"></div>
+
+            <img
+            src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200">
+
+            <div class="hero-caption">
+
+                <span class="hero-badge">
+
+                    Website Resmi
+
+                </span>
+
+                <h1>
+
+                    Yayasan Nurul Ma'rifah
+
+                </h1>
+
+                <p>
+
+                    Pendidikan Islam modern untuk membangun
+                    generasi unggul dan berakhlakul karimah.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        @endforelse
 
     </div>
+
+    <div class="swiper-pagination"></div>
 
 </div>
 
@@ -207,7 +115,7 @@ section{
             <div class="col-lg-6">
 
                 <img
-                src="https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1200"
+                src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200"
                 class="img-fluid rounded-5 shadow-lg">
 
             </div>
@@ -222,30 +130,42 @@ section{
 
                 <h2 class="fw-bold display-4 mb-4">
 
-                    Yayasan Nurul Ma'rifah
+                    Pendidikan Modern Berbasis Islami
 
                 </h2>
 
-                <p class="text-secondary fs-5">
+                <p class="text-secondary fs-5 lh-lg">
 
-                    Yayasan pendidikan Islam modern yang berkomitmen
-                    membangun generasi unggul, berakhlakul karimah,
-                    cerdas, kreatif, dan siap menghadapi masa depan.
+                    Yayasan Nurul Ma'rifah hadir sebagai lembaga pendidikan
+                    Islam modern yang berkomitmen membangun generasi
+                    unggul, cerdas, kreatif, dan berakhlakul karimah.
 
                 </p>
 
-                <div class="row mt-5">
+                <p class="text-secondary fs-5 lh-lg">
+
+                    Kami menyediakan pendidikan terpadu mulai dari
+                    PAUD, SD, SMP hingga SMA dengan lingkungan belajar
+                    yang nyaman dan berkualitas.
+
+                </p>
+
+                <div class="row mt-5 g-4">
 
                     <div class="col-6">
 
-                        <div class="shadow rounded-4 p-4 text-center">
+                        <div class="about-stat">
 
-                            <h1 class="fw-bold text-warning">
-                                1200+
+                            <h1>
+
+                                {{ $totalBerita }}+
+
                             </h1>
 
-                            <p class="mb-0 text-secondary">
-                                Siswa Aktif
+                            <p>
+
+                                Berita Sekolah
+
                             </p>
 
                         </div>
@@ -254,14 +174,18 @@ section{
 
                     <div class="col-6">
 
-                        <div class="shadow rounded-4 p-4 text-center">
+                        <div class="about-stat">
 
-                            <h1 class="fw-bold text-warning">
-                                80+
+                            <h1>
+
+                                {{ $totalGaleri }}+
+
                             </h1>
 
-                            <p class="mb-0 text-secondary">
-                                Guru Profesional
+                            <p>
+
+                                Galeri Kegiatan
+
                             </p>
 
                         </div>
@@ -289,117 +213,136 @@ section{
 
         </h2>
 
+        <p class="section-subtitle">
+
+            Yayasan Nurul Ma'rifah menyediakan pendidikan
+            terbaik dari usia dini hingga sekolah menengah atas.
+
+        </p>
+
         <div class="row g-4">
 
             <div class="col-lg-3 col-md-6">
 
-                <div class="card school-card shadow-lg h-100">
+                <a href="/sekolah/paud">
 
-                    <img
-                    src="https://images.unsplash.com/photo-1588072432836-e10032774350"
-                    class="card-img-top">
+                    <div class="school-card">
 
-                    <div class="card-body text-center p-4">
+                        <img
+                        src="https://images.unsplash.com/photo-1588072432836-e10032774350">
 
-                        <h3 class="fw-bold">
+                        <div class="card-body text-center">
 
-                            PAUD
+                            <h4>
 
-                        </h3>
+                                PAUD
 
-                        <p class="text-secondary">
+                            </h4>
 
-                            Pendidikan usia dini dengan metode belajar menyenangkan.
+                            <p>
 
-                        </p>
+                                Pendidikan usia dini yang menyenangkan.
+
+                            </p>
+
+                        </div>
 
                     </div>
 
-                </div>
+                </a>
 
             </div>
 
             <div class="col-lg-3 col-md-6">
 
-                <div class="card school-card shadow-lg h-100">
+                <a href="/sekolah/sd">
 
-                    <img
-                    src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b"
-                    class="card-img-top">
+                    <div class="school-card">
 
-                    <div class="card-body text-center p-4">
+                        <img
+                        src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b">
 
-                        <h3 class="fw-bold">
+                        <div class="card-body text-center">
 
-                            SD
+                            <h4>
 
-                        </h3>
+                                SD
 
-                        <p class="text-secondary">
+                            </h4>
 
-                            Pendidikan dasar modern berbasis karakter Islami.
+                            <p>
 
-                        </p>
+                                Pendidikan dasar berbasis karakter Islami.
+
+                            </p>
+
+                        </div>
 
                     </div>
 
-                </div>
+                </a>
 
             </div>
 
             <div class="col-lg-3 col-md-6">
 
-                <div class="card school-card shadow-lg h-100">
+                <a href="/sekolah/smp">
 
-                    <img
-                    src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6"
-                    class="card-img-top">
+                    <div class="school-card">
 
-                    <div class="card-body text-center p-4">
+                        <img
+                        src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6">
 
-                        <h3 class="fw-bold">
+                        <div class="card-body text-center">
 
-                            SMP
+                            <h4>
 
-                        </h3>
+                                SMP
 
-                        <p class="text-secondary">
+                            </h4>
 
-                            Membentuk generasi kreatif dan disiplin.
+                            <p>
 
-                        </p>
+                                Membentuk siswa kreatif dan disiplin.
+
+                            </p>
+
+                        </div>
 
                     </div>
 
-                </div>
+                </a>
 
             </div>
 
             <div class="col-lg-3 col-md-6">
 
-                <div class="card school-card shadow-lg h-100">
+                <a href="/sekolah/sma">
 
-                    <img
-                    src="https://images.unsplash.com/photo-1513258496099-48168024aec0"
-                    class="card-img-top">
+                    <div class="school-card">
 
-                    <div class="card-body text-center p-4">
+                        <img
+                        src="https://images.unsplash.com/photo-1513258496099-48168024aec0">
 
-                        <h3 class="fw-bold">
+                        <div class="card-body text-center">
 
-                            SMA
+                            <h4>
 
-                        </h3>
+                                SMA
 
-                        <p class="text-secondary">
+                            </h4>
 
-                            Menyiapkan siswa unggul menuju masa depan.
+                            <p>
 
-                        </p>
+                                Menyiapkan generasi unggul masa depan.
+
+                            </p>
+
+                        </div>
 
                     </div>
 
-                </div>
+                </a>
 
             </div>
 
@@ -414,11 +357,32 @@ section{
 
     <div class="container">
 
-        <h2 class="section-title">
+        <div class="d-flex justify-content-between align-items-center mb-5 flex-wrap gap-3">
 
-            Berita Terbaru
+            <div>
 
-        </h2>
+                <h2 class="section-title text-start mb-2">
+
+                    Berita Terbaru
+
+                </h2>
+
+                <p class="text-secondary">
+
+                    Informasi terbaru kegiatan sekolah
+
+                </p>
+
+            </div>
+
+            <a href="/berita"
+            class="btn btn-warning rounded-pill px-4">
+
+                Lihat Semua
+
+            </a>
+
+        </div>
 
         <div class="row g-4">
 
@@ -426,21 +390,38 @@ section{
 
             <div class="col-lg-4">
 
-                <div class="card school-card shadow h-100">
+                <div class="modern-card h-100">
 
-                    <img
-                    src="{{ asset('uploads/berita/'.$item->thumbnail) }}">
+                    <div class="modern-image">
 
-                    <div class="card-body p-4">
+                        <img
+                        src="{{ asset('uploads/berita/'.$item->thumbnail) }}"
+                        alt="{{ $item->judul }}">
 
-                        <h4 class="fw-bold mb-3">
+                    </div>
+
+                    <div class="modern-content">
+
+                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill mb-3">
+
+                            Berita Sekolah
+
+                        </span>
+
+                        <h4>
 
                             {{ $item->judul }}
 
                         </h4>
 
+                        <p class="modern-description">
+
+                            {{ Str::limit(strip_tags($item->isi), 120) }}
+
+                        </p>
+
                         <a href="/berita/{{ $item->slug }}"
-                        class="btn btn-warning rounded-pill px-4">
+                        class="btn btn-warning rounded-pill px-4 mt-3">
 
                             Baca Selengkapnya
 
@@ -454,13 +435,18 @@ section{
 
             @empty
 
-            <div class="text-center">
+            <div class="col-12 text-center py-5">
 
-                <h4>
+                <img
+                src="https://cdn-icons-png.flaticon.com/512/7486/7486740.png"
+                width="180"
+                class="mb-4">
 
-                    Belum ada berita
+                <h3 class="fw-bold">
 
-                </h4>
+                    Belum Ada Berita
+
+                </h3>
 
             </div>
 
@@ -483,25 +469,32 @@ section{
 
         </h2>
 
+        <p class="section-subtitle">
+
+            Kami menghadirkan pendidikan modern
+            dengan kualitas terbaik untuk masa depan siswa.
+
+        </p>
+
         <div class="row g-4">
 
             <div class="col-lg-4">
 
-                <div class="feature-box shadow-lg text-center h-100">
+                <div class="feature-box h-100">
 
                     <i class="fas fa-school fa-4x"></i>
 
-                    <h3 class="fw-bold mb-3">
+                    <h4>
 
                         Fasilitas Lengkap
 
-                    </h3>
+                    </h4>
 
-                    <p class="text-secondary">
+                    <p>
 
                         Ruang belajar nyaman,
-                        laboratorium lengkap,
-                        dan lingkungan modern.
+                        laboratorium modern,
+                        dan lingkungan yang mendukung.
 
                     </p>
 
@@ -511,20 +504,20 @@ section{
 
             <div class="col-lg-4">
 
-                <div class="feature-box shadow-lg text-center h-100">
+                <div class="feature-box h-100">
 
                     <i class="fas fa-user-graduate fa-4x"></i>
 
-                    <h3 class="fw-bold mb-3">
+                    <h4>
 
                         Guru Profesional
 
-                    </h3>
+                    </h4>
 
-                    <p class="text-secondary">
+                    <p>
 
                         Tenaga pengajar berkualitas
-                        dan berpengalaman.
+                        dan berpengalaman di bidangnya.
 
                     </p>
 
@@ -534,20 +527,20 @@ section{
 
             <div class="col-lg-4">
 
-                <div class="feature-box shadow-lg text-center h-100">
+                <div class="feature-box h-100">
 
                     <i class="fas fa-award fa-4x"></i>
 
-                    <h3 class="fw-bold mb-3">
+                    <h4>
 
                         Banyak Prestasi
 
-                    </h3>
+                    </h4>
 
-                    <p class="text-secondary">
+                    <p>
 
-                        Aktif meraih prestasi akademik
-                        dan non akademik.
+                        Aktif meraih prestasi
+                        akademik maupun non akademik.
 
                     </p>
 
@@ -566,38 +559,58 @@ section{
 
     <div class="container">
 
-        <h2 class="section-title">
+        <div class="d-flex justify-content-between align-items-center mb-5 flex-wrap gap-3">
 
-            Galeri Kegiatan
+            <div>
 
-        </h2>
+                <h2 class="section-title text-start mb-2">
 
-        <div class="row gallery g-4">
+                    Galeri Kegiatan
 
-            @foreach($galeri as $item)
+                </h2>
+
+                <p class="text-secondary">
+
+                    Dokumentasi kegiatan sekolah dan yayasan
+
+                </p>
+
+            </div>
+
+            <a href="/galeri"
+            class="btn btn-warning rounded-pill px-4">
+
+                Lihat Semua
+
+            </a>
+
+        </div>
+
+        <div class="row g-4">
+
+            @forelse($galeri as $item)
 
             <div class="col-lg-4 col-md-6">
 
-                <div class="overflow-hidden rounded-4 shadow-lg position-relative">
+                <div class="gallery-card">
 
                     <img
                     src="{{ asset('uploads/galeri/'.$item->gambar) }}"
-                    class="img-fluid w-100">
+                    alt="{{ $item->judul }}">
 
-                    <div class="position-absolute bottom-0 start-0 w-100 p-4"
-                    style="background:rgba(0,0,0,0.6)">
+                    <div class="gallery-overlay">
 
-                        <h5 class="text-white fw-bold">
+                        <h4>
 
                             {{ $item->judul }}
 
-                        </h5>
+                        </h4>
 
-                        <small class="text-light">
+                        <span>
 
                             {{ $item->kategori }}
 
-                        </small>
+                        </span>
 
                     </div>
 
@@ -605,7 +618,19 @@ section{
 
             </div>
 
-            @endforeach
+            @empty
+
+            <div class="col-12 text-center py-5">
+
+                <h3>
+
+                    Belum Ada Galeri
+
+                </h3>
+
+            </div>
+
+            @endforelse
 
         </div>
 
@@ -618,53 +643,85 @@ section{
 
     <div class="container">
 
-        <div class="row text-center">
+        <div class="row g-4 text-center">
 
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-lg-3 col-md-6">
 
-                <h1 class="display-3 fw-bold text-warning">
+                <div class="stat-box">
 
-                    1200+
+                    <h1>
 
-                </h1>
+                        {{ $totalBerita }}+
 
-                <h5>Siswa</h5>
+                    </h1>
 
-            </div>
+                    <p>
 
-            <div class="col-lg-3 col-md-6 mb-4">
+                        Berita
 
-                <h1 class="display-3 fw-bold text-warning">
+                    </p>
 
-                    80+
-
-                </h1>
-
-                <h5>Guru</h5>
+                </div>
 
             </div>
 
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-lg-3 col-md-6">
 
-                <h1 class="display-3 fw-bold text-warning">
+                <div class="stat-box">
 
-                    35+
+                    <h1>
 
-                </h1>
+                        {{ $totalGaleri }}+
 
-                <h5>Prestasi</h5>
+                    </h1>
+
+                    <p>
+
+                        Galeri
+
+                    </p>
+
+                </div>
 
             </div>
 
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-lg-3 col-md-6">
 
-                <h1 class="display-3 fw-bold text-warning">
+                <div class="stat-box">
 
-                    15+
+                    <h1>
 
-                </h1>
+                        {{ $totalPrestasi }}+
 
-                <h5>Ekstrakurikuler</h5>
+                    </h1>
+
+                    <p>
+
+                        Prestasi
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="stat-box">
+
+                    <h1>
+
+                        {{ $totalEkskul }}+
+
+                    </h1>
+
+                    <p>
+
+                        Ekstrakurikuler
+
+                    </p>
+
+                </div>
 
             </div>
 
@@ -674,16 +731,22 @@ section{
 
 </section>
 
-<!-- CTA PPDB -->
+<!-- CTA -->
 <section>
 
     <div class="container">
 
         <div class="ppdb-section text-center shadow-lg">
 
+            <span class="badge bg-dark px-4 py-2 rounded-pill mb-4">
+
+                PPDB TELAH DIBUKA
+
+            </span>
+
             <h1 class="fw-bold display-4 mb-4">
 
-                Pendaftaran PPDB Dibuka
+                Bergabung Bersama Kami
 
             </h1>
 

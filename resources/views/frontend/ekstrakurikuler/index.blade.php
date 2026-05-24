@@ -8,13 +8,13 @@
 
         <h1 class="page-title">
 
-            Fasilitas Sekolah
+            Ekstrakurikuler
 
         </h1>
 
         <p class="page-subtitle">
 
-            Fasilitas modern dan lengkap untuk mendukung pembelajaran
+            Pengembangan bakat dan minat siswa
 
         </p>
 
@@ -28,7 +28,7 @@
 
         <div class="row g-4">
 
-            @forelse($fasilitas as $item)
+            @forelse($ekstrakurikuler as $item)
 
             <div class="col-lg-4 col-md-6">
 
@@ -37,8 +37,8 @@
                     <div class="modern-image">
 
                         <img
-                        src="{{ asset('uploads/fasilitas/'.$item->gambar) }}"
-                        alt="{{ $item->nama_fasilitas }}">
+                        src="{{ asset('uploads/ekstrakurikuler/'.$item->gambar) }}"
+                        alt="{{ $item->nama_ekskul }}">
 
                     </div>
 
@@ -46,9 +46,16 @@
 
                         <h4>
 
-                            {{ $item->nama_fasilitas }}
+                            {{ $item->nama_ekskul }}
 
                         </h4>
+
+                        <div class="modern-teacher">
+
+                            Pembina:
+                            {{ $item->pembina }}
+
+                        </div>
 
                         <p class="modern-description">
 
@@ -68,7 +75,7 @@
 
                 <h3>
 
-                    Belum Ada Data Fasilitas
+                    Belum Ada Data Ekskul
 
                 </h3>
 

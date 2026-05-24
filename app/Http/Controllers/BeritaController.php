@@ -125,4 +125,27 @@ class BeritaController extends Controller
 
     }
 
+    public function frontend()
+    {
+        $berita = Berita::latest()->get();
+
+        return view(
+            'frontend.berita.index',
+            compact('berita')
+        );
+    }
+
+    public function showFrontend($slug)
+    {
+        $berita = Berita::where(
+            'slug',
+            $slug
+        )->firstOrFail();
+
+        return view(
+            'frontend.berita.show',
+            compact('berita')
+        );
+    }
+
 }

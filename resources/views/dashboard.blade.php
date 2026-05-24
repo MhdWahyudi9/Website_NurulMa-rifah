@@ -2,15 +2,30 @@
 
 @section('content')
 
-<h1 class="page-title">
+<div class="d-flex justify-content-between align-items-center mb-4">
 
-    Dashboard
+    <div>
 
-</h1>
+        <h1 class="page-title mb-1">
+
+            Dashboard Admin
+
+        </h1>
+
+        <p class="text-secondary mb-0">
+
+            Selamat datang di panel admin Yayasan Nurul Ma'rifah
+
+        </p>
+
+    </div>
+
+</div>
 
 <div class="row g-4">
 
-    <div class="col-lg-3">
+    <!-- BERITA -->
+    <div class="col-lg-3 col-md-6">
 
         <div class="dashboard-card">
 
@@ -21,12 +36,14 @@
             </div>
 
             <div class="dashboard-title">
+
                 Total Berita
+
             </div>
 
             <div class="dashboard-value">
 
-                12
+                {{ $totalBerita }}
 
             </div>
 
@@ -34,7 +51,8 @@
 
     </div>
 
-    <div class="col-lg-3">
+    <!-- GALERI -->
+    <div class="col-lg-3 col-md-6">
 
         <div class="dashboard-card">
 
@@ -45,12 +63,14 @@
             </div>
 
             <div class="dashboard-title">
+
                 Total Galeri
+
             </div>
 
             <div class="dashboard-value">
 
-                25
+                {{ $totalGaleri }}
 
             </div>
 
@@ -58,7 +78,8 @@
 
     </div>
 
-    <div class="col-lg-3">
+    <!-- PPDB -->
+    <div class="col-lg-3 col-md-6">
 
         <div class="dashboard-card">
 
@@ -69,12 +90,14 @@
             </div>
 
             <div class="dashboard-title">
-                PPDB
+
+                Total PPDB
+
             </div>
 
             <div class="dashboard-value">
 
-                50
+                {{ $totalPPDB }}
 
             </div>
 
@@ -82,7 +105,8 @@
 
     </div>
 
-    <div class="col-lg-3">
+    <!-- VISITOR -->
+    <div class="col-lg-3 col-md-6">
 
         <div class="dashboard-card">
 
@@ -93,12 +117,14 @@
             </div>
 
             <div class="dashboard-title">
-                Visitors
+
+                Total Visitor
+
             </div>
 
             <div class="dashboard-value">
 
-                1.2K
+                {{ $totalVisitor }}
 
             </div>
 
@@ -108,19 +134,40 @@
 
 </div>
 
-<div class="card-admin mt-4">
+<!-- WELCOME -->
+<div class="card-admin mt-5">
 
-    <h4 class="mb-4">
+    <div class="row align-items-center">
 
-        Selamat Datang di Admin Panel
+        <div class="col-lg-8">
 
-    </h4>
+            <h3 class="fw-bold mb-3">
 
-    <p style="color:#64748b">
+                Selamat Datang 👋
 
-        Kelola website Yayasan Nurul Ma'rifah dengan mudah melalui dashboard admin ini.
+            </h3>
 
-    </p>
+            <p class="text-secondary mb-0">
+
+                Kelola seluruh website Yayasan Nurul Ma'rifah
+                melalui dashboard admin ini.
+                Anda dapat mengatur berita, galeri,
+                event, prestasi, fasilitas,
+                dan berbagai informasi sekolah lainnya.
+
+            </p>
+
+        </div>
+
+        <div class="col-lg-4 text-center">
+
+            <img
+            src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+            width="180">
+
+        </div>
+
+    </div>
 
 </div>
 

@@ -2,63 +2,74 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ekstrakurikuler;
 use Illuminate\Http\Request;
 
 class EkstrakurikulerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function frontend()
+    {
+        $ekstrakurikuler = Ekstrakurikuler::latest()->get();
+
+        return view('frontend.ekstrakurikuler.index', compact('ekstrakurikuler'));
+    }
+
     public function index()
     {
-        //
+        $ekstrakurikuler = Ekstrakurikuler::latest()->get();
+
+        return view('admin.ekstrakurikuler.index', compact('ekstrakurikuler'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.ekstrakurikuler.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_ekskul' => 'required',
+            'pembina' => 'required',
+            'deskripsi' => 'required',
+            'gambar' => 'required|image|mimes:jpg,jpeg,png,webp'
+        ]);
+
+        $gambar = null;
+
+        if ($request->hasFile('gambar')) {
+
+            $gambar = time().'_ekskul.'.$request->gambar->extension();
+
+            $request->gambar->move(
+                public_path('uploads/ekstrakurikuler'),
+                $gambar
+            );
+        }
+
+        Ekstrakurikuler::create([
+            'nama_ekskul' => $request->nama_ekskul,
+            'pembina' => $request->pembina,
+            'deskripsi' => $request->deskripsi,
+            'gambar' => $gambar
+        ]);
+
+        return redirect('/admin/ekstrakurikuler')
+        ->with('success', 'Ekstrakurikuler berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function destroy($id)
     {
-        //
-    }
+        $ekskul = Ekstrakurikuler::findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        $path = public_path('uploads/ekstrakurikuler/'.$ekskul->gambar);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        if (file_exists($path)) {
+            unlink($path);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $ekskul->delete();
+
+        return back()->with('success', 'Ekstrakurikuler berhasil dihapus');
     }
 }

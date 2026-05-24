@@ -3,60 +3,118 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\BeritaController;
-use App\Http\Controllers\GaleriController;
-use App\Http\Controllers\SliderController;
-use App\Http\Controllers\PPDBController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\FasilitasController;
-use App\Http\Controllers\PrestasiController;
+use App\Http\Controllers\PPDBController;
+
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\PrestasiController;
+use App\Http\Controllers\FasilitasController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\EkstrakurikulerController;
 
 /*
 |--------------------------------------------------------------------------
-| FRONTEND
+| FRONTEND PUBLIC
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class,'index']);
+Route::get('/profil', [HomeController::class,'profil']);
 
-Route::get('/profil', [HomeController::class, 'profil']);
-Route::get('/berita', [BeritaController::class, 'index']);
-Route::get('/berita/{slug}', [BeritaController::class, 'show']);
-Route::get('/galeri', [GaleriController::class, 'index']);
-Route::get('/ppdb', [PPDBController::class, 'index']);
-Route::post('/ppdb/store', [PPDBController::class, 'store']);
-Route::get('/fasilitas', [FasilitasController::class, 'index']);
-Route::get('/prestasi', [PrestasiController::class, 'index']);
-Route::get('/event', [EventController::class, 'index']);
-Route::get('/ekstrakurikuler', [EkstrakurikulerController::class, 'index']);
+Route::view('/visi-misi','frontend.visi-misi');
+Route::view('/kontak','frontend.kontak');
+Route::view('/pengumuman','frontend.pengumuman');
 
 /*
 |--------------------------------------------------------------------------
-| DASHBOARD
+| UNIT SEKOLAH
 |--------------------------------------------------------------------------
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::view('/sekolah/paud','frontend.sekolah.paud');
+Route::view('/sekolah/sd','frontend.sekolah.sd');
+Route::view('/sekolah/smp','frontend.sekolah.smp');
+Route::view('/sekolah/sma','frontend.sekolah.sma');
 
 /*
 |--------------------------------------------------------------------------
-| PROFILE
+| BERITA
 |--------------------------------------------------------------------------
 */
 
-Route::middleware('auth')->group(function () {
+Route::get('/berita',[BeritaController::class,'frontend']);
+Route::get('/berita/{slug}',[BeritaController::class,'showFrontend']);
 
-    Route::get('/profile', [ProfileController::class, 'edit'])
+/*
+|--------------------------------------------------------------------------
+| EVENT
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/event/{id}',[EventController::class,'showFrontend']);
+Route::get('/event',[EventController::class,'frontend']);
+/*
+|--------------------------------------------------------------------------
+| PRESTASI
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/prestasi',[PrestasiController::class,'frontend']);
+Route::get('/prestasi/{id}',[PrestasiController::class,'showFrontend']);
+
+/*
+|--------------------------------------------------------------------------
+| GALERI
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/galeri',[GaleriController::class,'frontend']);
+
+/*
+|--------------------------------------------------------------------------
+| FASILITAS
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/fasilitas',[FasilitasController::class,'frontend']);
+
+/*
+|--------------------------------------------------------------------------
+| EKSTRAKURIKULER
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/ekstrakurikuler',[EkstrakurikulerController::class,'frontend']);
+
+/*
+|--------------------------------------------------------------------------
+| PPDB
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/ppdb',[PPDBController::class,'index']);
+Route::post('/ppdb/store',[PPDBController::class,'store']);
+
+/*
+|--------------------------------------------------------------------------
+| DASHBOARD & PROFILE
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth'])->group(function(){
+
+    Route::get('/dashboard',[HomeController::class,'dashboard'])
+    ->name('dashboard');
+
+    Route::get('/profile',[ProfileController::class,'edit'])
     ->name('profile.edit');
 
-    Route::patch('/profile', [ProfileController::class, 'update'])
+    Route::patch('/profile',[ProfileController::class,'update'])
     ->name('profile.update');
 
-    Route::delete('/profile', [ProfileController::class, 'destroy'])
+    Route::delete('/profile',[ProfileController::class,'destroy'])
     ->name('profile.destroy');
 
 });
@@ -67,21 +125,35 @@ Route::middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 */
 
-Route::middleware('auth')->group(function(){
+Route::middleware(['auth'])
+->prefix('admin')
+->group(function(){
 
-    Route::resource('admin/berita', BeritaController::class);
+    /*
+    |--------------------------------------------------------------------------
+    | DASHBOARD ADMIN
+    |--------------------------------------------------------------------------
+    */
 
-    Route::resource('admin/slider', SliderController::class);
+    Route::get('/dashboard',[HomeController::class,'dashboard']);
 
-    Route::resource('admin/galeri', GaleriController::class);
+    /*
+    |--------------------------------------------------------------------------
+    | MASTER DATA
+    |--------------------------------------------------------------------------
+    */
 
-    Route::resource('admin/fasilitas', FasilitasController::class);
+    Route::resources([
 
-    Route::resource('admin/prestasi', PrestasiController::class);
+        'berita' => BeritaController::class,
+        'slider' => SliderController::class,
+        'galeri' => GaleriController::class,
+        'fasilitas' => FasilitasController::class,
+        'prestasi' => PrestasiController::class,
+        'event' => EventController::class,
+        'ekstrakurikuler' => EkstrakurikulerController::class,
 
-    Route::resource('admin/event', EventController::class);
-
-    Route::resource('admin/ekstrakurikuler', EkstrakurikulerController::class);
+    ]);
 
 });
 

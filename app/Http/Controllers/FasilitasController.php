@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Fasilitas;
+use Illuminate\Http\Request;
 
 class FasilitasController extends Controller
 {
+    public function frontend()
+    {
+        $fasilitas = Fasilitas::latest()->get();
+
+        return view('frontend.fasilitas.index', compact('fasilitas'));
+    }
+
     public function index()
     {
         $fasilitas = Fasilitas::latest()->get();
 
-        if(request()->is('admin/*')){
-
-            return view('admin.fasilitas.index', compact('fasilitas'));
-
-        }
-
-        return view('frontend.fasilitas.index', compact('fasilitas'));
+        return view('admin.fasilitas.index', compact('fasilitas'));
     }
 
     public function create()
@@ -27,31 +28,46 @@ class FasilitasController extends Controller
 
     public function store(Request $request)
     {
-        $gambar = time().'.'.$request->gambar->extension();
+        $request->validate([
+            'nama_fasilitas' => 'required',
+            'deskripsi' => 'required',
+            'gambar' => 'required|image|mimes:jpg,jpeg,png,webp'
+        ]);
 
-        $request->gambar->move(
-            public_path('uploads/fasilitas'),
-            $gambar
-        );
+        $gambar = null;
+
+        if ($request->hasFile('gambar')) {
+
+            $gambar = time().'_fasilitas.'.$request->gambar->extension();
+
+            $request->gambar->move(
+                public_path('uploads/fasilitas'),
+                $gambar
+            );
+        }
 
         Fasilitas::create([
-
             'nama_fasilitas' => $request->nama_fasilitas,
-            'gambar' => $gambar,
             'deskripsi' => $request->deskripsi,
-
+            'gambar' => $gambar
         ]);
 
         return redirect('/admin/fasilitas')
-        ->with('success','Data berhasil ditambahkan');
+        ->with('success', 'Fasilitas berhasil ditambahkan');
     }
 
     public function destroy($id)
     {
         $item = Fasilitas::findOrFail($id);
 
+        $path = public_path('uploads/fasilitas/'.$item->gambar);
+
+        if (file_exists($path)) {
+            unlink($path);
+        }
+
         $item->delete();
 
-        return back();
+        return back()->with('success', 'Fasilitas berhasil dihapus');
     }
 }

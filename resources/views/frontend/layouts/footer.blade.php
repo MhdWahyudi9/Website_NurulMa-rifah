@@ -12,7 +12,7 @@
                     <img
                     src="{{ asset('images/logo.png') }}"
                     alt="Logo"
-                    width="60"
+                    width="100"
                     class="me-3">
 
                     <div>
@@ -141,7 +141,7 @@
                 <ul class="list-unstyled mt-4">
 
                     <li class="mb-3">
-                        <a href="/paud"
+                        <a href="/sekolah/paud"
                         class="text-light">
 
                             PAUD
@@ -150,7 +150,7 @@
                     </li>
 
                     <li class="mb-3">
-                        <a href="/sd"
+                        <a href="/sekolah/sd"
                         class="text-light">
 
                             SD
@@ -159,7 +159,7 @@
                     </li>
 
                     <li class="mb-3">
-                        <a href="/smp"
+                        <a href="/sekolah/smp"
                         class="text-light">
 
                             SMP
@@ -168,7 +168,7 @@
                     </li>
 
                     <li class="mb-3">
-                        <a href="/sma"
+                        <a href="/sekolah/sma"
                         class="text-light">
 
                             SMA

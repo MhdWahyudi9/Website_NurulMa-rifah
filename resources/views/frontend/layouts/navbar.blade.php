@@ -1,38 +1,27 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
-
     <div class="container">
 
         <!-- LOGO -->
         <a class="navbar-brand d-flex align-items-center" href="/">
-
             <img
-            src="{{ asset('images/logo.png') }}"
-            alt="Logo"
-            width="45"
-            class="me-2">
+                src="{{ asset('images/logo.png') }}"
+                alt="Logo Sekolah"
+                class="logo-school">
 
-            <div>
-
-                <div class="fw-bold">
-                    Yayasan Nurul Ma'rifah
-                </div>
-
-                <small style="font-size:12px; color:#cbd5e1;">
-                    PAUD • SD • SMP • SMA
-                </small>
-
+            <div class="brand-text">
+                <h5>Yayasan Nurul Ma'rifah</h5>
+                <small>PAUD • SD • SMP • SMA</small>
             </div>
-
         </a>
 
         <!-- TOGGLER -->
-        <button class="navbar-toggler border-0 shadow-none"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav">
+        <button
+            class="navbar-toggler border-0 shadow-none"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
 
             <span class="navbar-toggler-icon"></span>
-
         </button>
 
         <!-- MENU -->
@@ -41,25 +30,26 @@
             <ul class="navbar-nav ms-auto align-items-lg-center">
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="/">
-                        Home
+                    <a class="nav-link {{ request()->is('/') ? 'active' : '' }}"
+                    href="/">
+
+                        Beranda
+
                     </a>
                 </li>
 
-                <!-- DROPDOWN PROFIL -->
+                <!-- PROFIL -->
                 <li class="nav-item dropdown">
 
                     <a class="nav-link dropdown-toggle"
                     href="#"
-                    id="profilDropdown"
-                    role="button"
                     data-bs-toggle="dropdown">
 
                         Profil
 
                     </a>
 
-                    <ul class="dropdown-menu border-0 shadow rounded-4">
+                    <ul class="dropdown-menu">
 
                         <li>
                             <a class="dropdown-item"
@@ -79,55 +69,56 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a class="dropdown-item"
-                            href="/struktur-organisasi">
-
-                                Struktur Organisasi
-
-                            </a>
-                        </li>
-
                     </ul>
 
                 </li>
 
-                <!-- DROPDOWN SEKOLAH -->
+                <!-- UNIT -->
                 <li class="nav-item dropdown">
 
                     <a class="nav-link dropdown-toggle"
                     href="#"
-                    id="sekolahDropdown"
-                    role="button"
                     data-bs-toggle="dropdown">
 
                         Unit Sekolah
 
                     </a>
 
-                    <ul class="dropdown-menu border-0 shadow rounded-4">
+                    <ul class="dropdown-menu">
 
                         <li>
-                            <a class="dropdown-item" href="/paud">
+                            <a class="dropdown-item"
+                            href="/sekolah/paud">
+
                                 PAUD
+
                             </a>
                         </li>
 
                         <li>
-                            <a class="dropdown-item" href="/sd">
+                            <a class="dropdown-item"
+                            href="/sekolah/sd">
+
                                 SD
+
                             </a>
                         </li>
 
                         <li>
-                            <a class="dropdown-item" href="/smp">
+                            <a class="dropdown-item"
+                            href="/sekolah/smp">
+
                                 SMP
+
                             </a>
                         </li>
 
                         <li>
-                            <a class="dropdown-item" href="/sma">
+                            <a class="dropdown-item"
+                            href="/sekolah/sma">
+
                                 SMA
+
                             </a>
                         </li>
 
@@ -135,100 +126,118 @@
 
                 </li>
 
-                <!-- MENU -->
-                <li class="nav-item">
-                    <a class="nav-link" href="/berita">
-                        Berita
+                <!-- INFORMASI -->
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle"
+                    href="#"
+                    data-bs-toggle="dropdown">
+
+                        Informasi
+
                     </a>
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a class="dropdown-item"
+                            href="/berita">
+
+                                Berita
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                            href="/prestasi">
+
+                                Prestasi
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                            href="/event">
+
+                                Event
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                            href="/pengumuman">
+
+                                Pengumuman
+
+                            </a>
+                        </li>
+
+                    </ul>
+
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/galeri">
-                        Galeri
+                <!-- AKTIVITAS -->
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle"
+                    href="#"
+                    data-bs-toggle="dropdown">
+
+                        Aktivitas
+
                     </a>
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a class="dropdown-item"
+                            href="/galeri">
+
+                                Galeri
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                            href="/ekstrakurikuler">
+
+                                Ekskul
+
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item"
+                            href="/fasilitas">
+
+                                Fasilitas
+
+                            </a>
+                        </li>
+
+                    </ul>
+
                 </li>
 
+                <!-- KONTAK -->
                 <li class="nav-item">
-                    <a class="nav-link" href="/fasilitas">
-                        Fasilitas
-                    </a>
-                </li>
+                    <a class="nav-link"
+                    href="/kontak">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/prestasi">
-                        Prestasi
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/event">
-                        Event
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/ekstrakurikuler">
-                        Ekskul
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/event">
-                        Event
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/kontak">
                         Kontak
-                    </a>
-                </li>
-
-                <!-- AUTH ADMIN -->
-                @auth
-
-                <li class="nav-item ms-lg-3">
-
-                    <a href="/dashboard"
-                    class="nav-link">
-
-                        <i class="fas fa-user-shield me-1"></i>
-
-                        Dashboard
 
                     </a>
-
                 </li>
 
-                <li class="nav-item ms-lg-2 mt-3 mt-lg-0">
-
-                    <form
-                    action="{{ route('logout') }}"
-                    method="POST">
-
-                        @csrf
-
-                        <button
-                        class="btn btn-danger rounded-pill px-4 fw-semibold">
-
-                            <i class="fas fa-sign-out-alt me-1"></i>
-
-                            Logout
-
-                        </button>
-
-                    </form>
-
-                </li>
-
-                @else
-
-                <li class="nav-item ms-lg-3">
+                <!-- BUTTON -->
+                <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
 
                     <a href="/login"
-                    class="nav-link">
-
-                        <i class="fas fa-lock me-1"></i>
+                    class="btn btn-admin">
 
                         Admin
 
@@ -236,13 +245,10 @@
 
                 </li>
 
-                @endauth
-
-                <!-- BUTTON PPDB -->
-                <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                <li class="nav-item ms-lg-2 mt-3 mt-lg-0">
 
                     <a href="/ppdb"
-                    class="btn btn-warning rounded-pill px-4 fw-semibold">
+                    class="btn btn-ppdb">
 
                         PPDB
 
@@ -255,5 +261,4 @@
         </div>
 
     </div>
-
 </nav>

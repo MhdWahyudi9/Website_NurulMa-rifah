@@ -42,6 +42,9 @@
     href="https://unpkg.com/aos@2.3.4/dist/aos.css"
     rel="stylesheet">
 
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <style>
 
         *{
@@ -125,6 +128,8 @@
             color:white;
             position:relative;
             overflow:hidden;
+            background-image:radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size:20px 20px;
         }
 
         .page-title{
@@ -140,6 +145,8 @@
             line-height:1.9;
             font-size:20px;
         }
+
+        
 
         /* ====================================
         NAVBAR
@@ -366,12 +373,48 @@
             overflow:hidden;
             transition:0.4s;
             height:100%;
-            box-shadow:0 10px 35px rgba(0,0,0,0.06);
+            box-shadow:
+            0 10px 35px rgba(0,0,0,0.06);
+
+            border:1px solid rgba(255,255,255,0.4);
+
+            backdrop-filter:blur(12px);
+
+            position:relative;
         }
 
         .modern-card:hover{
             transform:translateY(-10px);
         }
+
+        .modern-card::before{
+            content:'';
+            position:absolute;
+            inset:0;
+            border-radius:30px;
+            padding:1px;
+
+            background:
+            linear-gradient(
+                135deg,
+                rgba(250,204,21,0.6),
+                transparent
+            );
+
+            -webkit-mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+
+            -webkit-mask-composite:xor;
+            mask-composite:exclude;
+
+            opacity:0;
+            transition:0.4s;
+        }
+
+        .modern-card:hover::before{
+            opacity:1;
+        }        
 
         .modern-image{
             overflow:hidden;
@@ -382,11 +425,13 @@
             width:100%;
             height:260px;
             object-fit:cover;
-            transition:0.4s;
+            transition:0.5s;
+            filter:brightness(0.92);
         }
 
         .modern-card:hover img{
             transform:scale(1.08);
+            filter:brightness(1);
         }
 
         .modern-content{

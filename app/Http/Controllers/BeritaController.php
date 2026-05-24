@@ -137,14 +137,23 @@ class BeritaController extends Controller
 
     public function showFrontend($slug)
     {
+
         $berita = Berita::where(
             'slug',
             $slug
         )->firstOrFail();
 
+        $beritaTerbaru = Berita::latest()
+            ->where('id', '!=', $berita->id)
+            ->take(5)
+            ->get();
+
         return view(
             'frontend.berita.show',
-            compact('berita')
+            compact(
+                'berita',
+                'beritaTerbaru'
+            )
         );
     }
 
